@@ -1,0 +1,38 @@
+qualification_threshold: 70
+auto_reject_threshold: 20
+criteria:
+- name: b2b_fit
+  description: Is this a B2B company?
+  max_points: 20
+  evaluation_prompt: 'Is this company selling to other businesses (B2B)? Score 20
+    if yes, 5 if mixed B2B/B2C, 0 if pure B2C.
+
+    '
+- name: company_size
+  description: Company has 50+ employees
+  max_points: 20
+  evaluation_prompt: 'Based on available data, estimate employee count. Score 20 for
+    200+, 15 for 50-200, 10 for 20-50, 5 for <20.
+
+    '
+- name: tech_stack_fit
+  description: Uses relevant technologies
+  max_points: 20
+  evaluation_prompt: 'Does the company use technologies like React, Python, Node.js,
+    or cloud services? Score based on alignment with modern tech stacks.
+
+    '
+- name: buying_signals
+  description: Shows active buying signals
+  max_points: 20
+  evaluation_prompt: 'Look for hiring activity, recent funding, tech stack changes,
+    or growth indicators. Score accordingly.
+
+    '
+- name: reachability
+  description: Contact info availability
+  max_points: 20
+  evaluation_prompt: 'Is there a valid contact email and name? Score 20 for both,
+    10 for one, 0 for neither.
+
+    '

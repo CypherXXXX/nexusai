@@ -1,0 +1,63 @@
+# ── Dependencies ─────────────────────────────────
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pyo
+.venv/
+venv/
+env/
+
+# ── Environment ──────────────────────────────────
+.env
+.env.local
+.env.*.local
+*.env
+
+# ── Framework / Build ────────────────────────────
+.next/
+out/
+build/
+dist/
+*.egg-info/
+*.egg
+
+# ── Database ─────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── IDE / Editor ─────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── OS ───────────────────────────────────────────
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# ── Testing ──────────────────────────────────────
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ── Misc ─────────────────────────────────────────
+*.tgz
+*.tar.gz
+.vercel/
+.turbo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ── Private Documentation ────────────────────────
+DEPLOY.md
