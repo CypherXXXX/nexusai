@@ -74,7 +74,7 @@ export function RealTimeHero() {
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Button>
                     </Link>
-                    <Link href="https://github.com/your-repo" target="_blank">
+                    <Link href="https://github.com/CypherXXXX/nexusai" target="_blank">
                         <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-full border-neutral-700 bg-black/40 hover:bg-neutral-900 text-neutral-300 backdrop-blur-sm">
                             View Documentation
                         </Button>
