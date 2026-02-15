@@ -206,5 +206,5 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ---
 
 <div align="center">
-  <p>Built with ❤️ by the NexusAI Team</p>
+  <p>Built with ❤️</p>
 </div>
