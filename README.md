@@ -170,5 +170,5 @@ npm run dev
 ---
 
 <div align="center">
-  <p>Built with ❤️ by CypherXXXX</p>
+  <p>Built with ❤️</p>
 </div>
