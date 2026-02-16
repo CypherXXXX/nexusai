@@ -12,199 +12,163 @@
 **Automate the tedious 80% of your sales process.**<br/>
 NexusAI is an intelligent CRM agent that autonomously researches leads, scores them with verifiable logic, and drafts hyper-personalized cold outreach that actually converts.
 
-[View Demo](#) · [Report Bug](https://github.com/yourusername/nexusai/issues) · [Request Feature](https://github.com/yourusername/nexusai/issues)
-
 </div>
 
 ---
 
-## 🚀 Why NexusAI?
+## 🚨 The Problem
 
-The modern sales stack is broken. SDRs spend hours switching between LinkedIn, company websites, and news outlets just to write one "personalized" email that often gets ignored.
+Modern sales development (SDR) is fundamentally broken:
+1.  **Manual Research**: SDRs spend 15-30 minutes per lead just to understand what a company does.
+2.  **Context Switching**: Jumping between LinkedIn, News, and Company Websites kills productivity.
+3.  **Generic Outreach**: "I saw you're hiring" emails get ignored because they lack depth.
+4.  **Inconsistent Scoring**: Leads are qualified based on gut feeling rather than data.
 
-**NexusAI fixes this by treating lead qualification as an engineering problem.**
+## 💡 The Solution: NexusAI
 
-Instead of generic templates, NexusAI builds a **structured knowledge graph** for every company in your pipeline. It "reads" their website, analyzes their tech stack, finds their funding status, and identifies key decision-makers—all before you even look at the lead.
-
-### ✨ Core Capabilities
-
-- **🕵️ Autonomous Deep Research**:
-  - Scrapes company websites and structured metadata.
-  - Cross-references data with **DuckDuckGo** and **Tavily** for real-time verification.
-  - Extracts key signals: Funding rounds, Recent Hires, Tech Stack, and strategic shifts.
-
-- **🧠 Cognitive Lead Scoring (0-100)**:
-  - Uses **Llama 3.3 (via Groq)** to analyze verified data against your Ideal Customer Profile (ICP).
-  - Provides a **score confidence** metric and a human-readable **reasoning** for every score.
-  - Detects **Buying Signals** (e.g., "Hiring 3 backend engineers") vs. **Red Flags**.
-
-- **✍️ Hyper-Personalized Drafting**:
-  - Generates emails that *prove* research was done.
-  - References specific pain points, recent news, or technical challenges found during research.
-  - **No Templates**: Every email is uniquely generated based on the company's specific context.
-
-- **📊 Modern Glassmorphism Dashboard**:
-  - Built with **Next.js 16** and **Tailwind v4**.
-  - Real-time pipeline analytics, drag-and-drop Kanban (coming soon), and detailed lead views.
-  - Dark mode first design with premium animations (Framer Motion).
+NexusAI fixes this by treating lead qualification as an **engineering problem**. It builds a **structured knowledge graph** for every company in your pipeline. It "reads" their website, analyzes their tech stack, finds their funding status, and identifies key decision-makers—all before you even look at the lead.
 
 ---
 
-## 🏗️ Architecture
+## ⚡ How It Works (The Workflow)
 
-NexusAI uses a sophisticated **LangGraph** workflow to manage the cognitive state of the agent.
+NexusAI uses a sophisticated **LangGraph** autonomous agent to process leads.
 
-```mermaid
-graph TD
-    A[USER: Submits URL/Domain] -->|Ingestion| B(LangGraph State Machine)
-    B --> C{Research Node}
-    C -->|Docs & Metadata| D[Enrichment Node]
-    D -->|Structured Profile| E[Scoring Node]
-    E -->|Score > Threshold?| F[Drafting Node]
-    E -->|Score < Threshold| G[Archive / Nurture]
-    F -->|Draft Email| H[Human Review Queue]
-    H -->|Approve/Edit| I[Send Email / Sync CRM]
+### 1️⃣ Ingestion & Initial Scan
+The user inputs a domain (e.g., `stripe.com`) or uploads a CSV. The system instantly validates the target and initializes a unique research session.
 
-    subgraph "Knowledge Engine"
-    K1[DuckDuckGo Search]
-    K2[Tavily Search]
-    K3[Web Scraper]
-    end
+### 2️⃣ Deep Autonomous Research
+The **Research Agent** activates, utilizing multiple intelligence sources:
+- **Tavily AI**: Performs deep, multi-hop searches to find strategic initiatives, recent news, and pain points.
+- **DuckDuckGo**: Cross-references findings for factual accuracy.
+- **Scraping**: Extracts metadata directly from the company's landing pages.
 
-    C <--> K1
-    C <--> K2
-    C <--> K3
+### 3️⃣ Intelligence Enrichment
+Raw data is structured into a comprehensive profile:
+- **Tech Stack Analysis**: Detects frameworks, cloud providers, and tools used.
+- **Decision Makers**: Identifies key stakeholders (CEO, CTO, VP Engineering).
+- **Firmographics**: Mapping industry, employee count, and funding status.
+
+### 4️⃣ Cognitive Scoring (0-100)
+A **Llama 3.3 (70B)** model evaluates the enriched profile against your Ideal Customer Profile (ICP).
+- **+ Points**: Hiring for relevant roles, recent funding, technical fit.
+- **- Points**: Incompatible tech stack, no recent activity.
+*Outcome: A precise score with a human-readable justification.*
+
+### 5️⃣ Hyper-Personalized Drafting
+If the lead qualifies (Score > 70%), the **Drafting Agent**:
+- Synthesizes all research into a coherent narrative.
+- Writes a "Look, we did our homework" email referencing specific company challenges.
+- **Zero Hallucinations**: Every claim is backed by the research data.
+
+---
+
+## 📖 User Manual
+
+### What is a Lead?
+In NexusAI, a "Lead" is simply a **Company Domain** (e.g., `openai.com`, `vercel.com`). You do not need contact names or emails initially—the AI attempts to find them during research.
+
+### Single Lead Research
+1.  Go to the **Dashboard**.
+2.  Click **Add Lead**.
+3.  Enter the company URL (e.g., `https://stripe.com` or just `stripe.com`).
+4.  The agent will immediately begin processing.
+
+### Bulk Upload (CSV)
+You can process hundreds of leads at once.
+1.  Prepare a CSV file.
+2.  **Required Header**: The file MUST have a column named `company_url`.
+3.  (Optional) `company_name` column.
+4.  Upload via the **Import Leads** button.
+
+---
+
+## 🛠️ Technology Stack & Tools
+
+NexusAI is built on a modern, high-performance stack designed for reliability and scale.
+
+### Backend (The Brain)
+*   **FastAPI**: High-performance, async Python framework perfect for concurrent AI tasks.
+*   **LangGraph**: Provides stateful, cyclical agent workflows. Unlike linear chains, this allows the agent to "loop back" if research is insufficient.
+*   **Groq**: Powers the **Llama 3.3 70B** model with near-instant inference speeds (<200ms), making real-time scoring possible.
+*   **Tavily AI**: Search engine optimized for LLMs. It returns clean, parsed text instead of raw HTML, reducing hallucination risks.
+*   **SQLite + aiosqlite**: Lightweight, file-based persistence. Deployed with a persistent disk for reliability.
+
+### Frontend (The Face)
+*   **Next.js 16**: The latest React framework with Server Components for a fast, SEO-friendly dashboard.
+*   **Tailwind CSS v4**: Utility-first CSS engine for the sleek, glassmorphism UI.
+*   **Framer Motion**: Cinematic, fluid interactions that make the dashboard feel alive.
+*   **Clerk**: Enterprise-grade authentication.
+*   **SWR**: React Hooks for data fetching with "stale-while-revalidate" caching strategy.
+
+---
+
+## 📂 Project Structure
+
+```bash
+📦 nexusai
+├── 📂 backend                 # FastAPI Python Application
+│   ├── 📂 api                 # API Routes & Middleware
+│   ├── 📂 src                 # Core Logic
+│   │   ├── 📂 graph           # LangGraph Agent Nodes (Research, Score, Draft)
+│   │   ├── 📂 database        # SQLAlchemy Models & CRUD
+│   │   ├── 📂 models          # Pydantic Schemas
+│   │   └── 📂 utils           # Helpers (Logger, API Clients)
+│   ├── main.py                # Server Entry Point
+│   └── requirements.txt       # Python Dependencies
+│
+├── 📂 frontend                # Next.js 16 Application
+│   ├── 📂 src
+│   │   ├── 📂 app             # App Router Pages
+│   │   ├── 📂 components      # Shadcn UI & Custom Components
+│   │   ├── 📂 hooks           # SWR Data Hooks
+│   │   └── 📂 lib             # API Client & Utilities
+│   ├── package.json           # Node.js Dependencies
+│   └── next.config.ts         # Next.js Configuration
+│
+└── README.md                  # Project Documentation
 ```
 
 ---
 
-## 🛠️ Tech Stack
-
-### Backend (The Brain)
-- **Framework**: FastAPI (High-performance async Python API)
-- **Orchestration**: LangChain & LangGraph (Stateful multi-actor (agent) applications)
-- **LLM Engine**: Groq (Llama 3.3 70B) for lightning-fast inference
-- **Database**: SQLAlchemy (Async) with SQLite (Dev) / PostgreSQL (Prod)
-- **Data Validation**: Pydantic v2
-
-### Frontend (The Face)
-- **Framework**: Next.js 16 (App Router)
-- **Styling**: Tailwind CSS v4, Framer Motion (Animations), Lucide React (Icons)
-- **Components**: Shadcn/ui (Radix UI primitives)
-- **Auth**: Clerk (Secure authentication)
-- **State Management**: SWR (Stale-while-revalidate data fetching)
-
----
-
-## ⚡ Getting Started
-
-### Prerequisites
-- **Python 3.11+**
-- **Node.js 18+**
-- **Groq API Key** (Essential for LLM inference)
+## 🚀 Getting Started (Local Development)
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/nexusai.git
+git clone https://github.com/CypherXXXX/nexusai.git
 cd nexusai
 ```
 
 ### 2. Backend Setup
-The backend handles all AI logic, database connections, and API endpoints.
+The backend handles all AI logic and database connections.
 
 ```bash
 cd backend
 
 # Create virtual environment
 python -m venv .venv
-
-# Activate (Windows)
-.venv\Scripts\activate
-# Activate (Mac/Linux)
-# source .venv/bin/activate
+# Activate: 
+# Windows: .venv\Scripts\activate
+# Mac/Linux: source .venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Setup Environment
-# Create a .env file based on the example below
-```
-
-**`backend/.env` Configuration:**
-```ini
-GROQ_API_KEY=gsk_your_key_here
-TAVILY_API_KEY=tvly_your_key_here  # Optional but recommended for better research
-DATABASE_URL=sqlite:///./nexusai.db
-```
-
-**Run the Backend:**
-```bash
+# Create .env file with your API keys (see .env.example)
 python main.py
-# Server will start on http://localhost:8000
-# API Docs available at http://localhost:8000/docs
 ```
 
 ### 3. Frontend Setup
-The frontend is a modern Next.js dashboard.
+The frontend is the visual dashboard.
 
 ```bash
-# Open a new terminal
 cd frontend
-
-# Install dependencies
 npm install
-
-# Setup Environment
-# Create a .env.local file
-```
-
-**`frontend/.env.local` Configuration:**
-```ini
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-**Run the Frontend:**
-```bash
 npm run dev
-# Dashboard will start on http://localhost:3000
 ```
-
----
-
-## 📖 Usage Guide
-
-1.  **Sign In**: Use the Clerk-powered authentication to log in.
-2.  **Add a Lead**: Navigate to "Leads" and click "Add Lead". Enter a company domain (e.g., `stripe.com`).
-3.  **Watch the Magic**:
-    - The agent will start the **Research** phase.
-    - Status will update from `researching` -> `scoring` -> `drafting`.
-4.  **Review**:
-    - Click on the lead to see the **Intelligence Report** (Tech stack, funding, etc.).
-    - Review the **Drafted Email**.
-    - Edit if necessary, or approve for sending.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to submit pull requests, report issues, and request features.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
 <div align="center">
-  <p>Built with ❤️</p>
+  <p>Built with ❤️ by CypherXXXX</p>
 </div>
