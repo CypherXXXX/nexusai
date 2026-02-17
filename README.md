@@ -1,4 +1,4 @@
-# 🧠 NexusAI: The Autonomous Sales Engineer
+# NexusAI: The Autonomous Sales Engineer
 
 <div align="center">
 
